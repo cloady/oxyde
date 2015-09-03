@@ -24,6 +24,9 @@
 					);
 				});
 
+				var chbgrwin = window.open('chbgr.html', 'width=200&height=300');
+				chbgrwin.focus();
+
 				/*App.ListDock(function(app) {
 					$('#dock').append(
 						$('<div></div>').html(app.name).css('bakcground-image', app.icon).attr('title', app.name)

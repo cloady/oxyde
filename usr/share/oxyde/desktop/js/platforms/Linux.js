@@ -11,7 +11,9 @@ var USR_PIXMAPS_PATH = '/usr/share/pixmaps',
 	USR_OTHERICON_PATH = '/usr/share/icons/hicolor/scalable/apps',
 	USR_BACKGROUND_PATH = '/usr/share/backgrounds';
 
-function parsePath(path, callback) {
+var DEFAULT_WALLPAPER = 'oxydesk_oxygen_wallpaper.jpg';
+
+function parseGtkApps(path, callback) {
 	fs.readdir(path, function(err, files) {
 		files.map(function(file) {
 			try {
@@ -40,23 +42,37 @@ function parsePath(path, callback) {
 	});
 }
 
-exports.ListAll = function(callback) {
-	parsePath(USR_APPS_PATH, callback);
-};
+module.exports = {
+	ListAll: function(callback) {
+		parseGtkApps(USR_APPS_PATH, callback);
+	},
 
-exports.ListDock = function(callback) {
-	parsePath(USR_DOCKAPPS_PATH, callback);
-};
+	ListDock: function(callback) {
+		parseGtkApps(USR_DOCKAPPS_PATH, callback);
+	},
 
-exports.ListFile = function() {
+	ListFile: function() {
 
-};
+	},
 
-exports.Exec = function(cmd) {
-	var cp = require("child_process");
-	cp.exec(cmd);
-};
+	Exec: function(cmd) {
+		var cp = require("child_process");
+		cp.exec(cmd);
+	},
 
-exports.GetWallpaper = function() {
-	return USR_BACKGROUND_PATH+'/warty-final-ubuntu.png'
+	SetWallpaper: function(image) {
+		$('body').css('background', 'url('+ (image) ? image : this.GetWallpaper() +')');
+	},
+
+	ListWallpapers: function(callback) {
+		fs.readdir(USR_BACKGROUND_PATH, function(err, files) {
+			files.map(function(file) {
+				callback({ name: file, image: USR_BACKGROUND_PATH+'/'+file });
+			});
+		});
+	},
+
+	GetWallpaper: function() {
+		return USR_BACKGROUND_PATH+'/warty-final-ubuntu.png';
+	}
 };
