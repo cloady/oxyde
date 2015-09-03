@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Applications</title>
+
+		<link rel="Stylesheet" href="./css/main.css" />
+		<script src="./js/jquery.min.js"></script>
+		<script>
+			$(function() {
+				var App = require('./js/platforms/Linux'); // require for linux
+				
+				$('body').css('background-image', 'url('+App.GetWallpaper()+')');
+
+				App.ListAll(function(app) {
+					$('#desk').append(
+						$('<div></div>')
+							.html(app.name)
+							.css('background-image', 'url('+app.icon+')')
+							.attr('title', app.description)
+							.data('exec', app.exec)
+							.click(function() {
+								App.Exec($(this).data('exec'));
+							})
+					);
+				});
+
+				/*App.ListDock(function(app) {
+					$('#dock').append(
+						$('<div></div>').html(app.name).css('bakcground-image', app.icon).attr('title', app.name)
+					)
+				});*/
+			});
+		</script>
+	</head>
+	<body>
+		<div id="menu"></div>
+		<div id="desk"></div>
+		<div id="dock"></div>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+body {
+	font-family: Arial;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	color: white; 
+	text-shadow: black 0.1em 0.1em 0.2em
+}
+
+#desk div {
+	background-repeat: no-repeat;
+	background-position: top center;
+	background-size: 64px 64px;
+	text-align: center;
+	width: 128px;
+	height: 72px;
+	float: left;
+	padding-top: 68px;
+}
+
+#desk div:hover {
+	-webkit-filter: brightness(1.5);
+}
