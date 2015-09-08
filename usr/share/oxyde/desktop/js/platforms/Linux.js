@@ -36,7 +36,7 @@ function parseGtkApps(path, callback) {
 						});
 				}
 			} catch(e) { 
-				console.error(e);
+				//console.log(e);
 			}
 		});
 	});
@@ -61,10 +61,10 @@ module.exports = {
 	},
 
 	SetWallpaper: function(image) {
-		$('body').css('background', 'url('+ (image) ? image : this.GetWallpaper() +')');
+		
 	},
 
-	ListWallpapers: function(callback) {
+	ListWallpaper: function(callback) {
 		fs.readdir(USR_BACKGROUND_PATH, function(err, files) {
 			files.map(function(file) {
 				callback({ name: file, image: USR_BACKGROUND_PATH+'/'+file });

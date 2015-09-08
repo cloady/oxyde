@@ -9,7 +9,7 @@
 			$(function() {
 				var App = require('./js/platforms/Linux'); // require for linux
 				
-				$('body').css('background-image', 'url('+App.GetWallpaper()+')');
+				App.SetWallpaper(App.GetWallpaper());
 
 				App.ListAll(function(app) {
 					$('#desk').append(
@@ -24,20 +24,18 @@
 					);
 				});
 
-				var chbgrwin = window.open('chbgr.html', 'width=200&height=300');
-				chbgrwin.focus();
+				$(window).on('message', function(e) {
+					var data = e.originalEvent.data;
+					$('body').css('background-image', 'url('+data+')');
+				});
 
-				/*App.ListDock(function(app) {
-					$('#dock').append(
-						$('<div></div>').html(app.name).css('bakcground-image', app.icon).attr('title', app.name)
-					)
-				});*/
+				$(window).on('contextmenu', function() {
+					window.open('chbgr.html', 'width=200&height=300');
+				});
 			});
 		</script>
 	</head>
 	<body>
-		<div id="menu"></div>
 		<div id="desk"></div>
-		<div id="dock"></div>
 	</body>
 </html>
