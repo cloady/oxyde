@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Place File Manager</title>
+
+		<link rel="Stylesheet" href="./css/main.css" />
+		<script src="./js/jquery.min.js"></script>
+		<script>
+			$(function() {
+				var App = require('./js/platforms/Linux'); // require for linux
+
+				function ListDirectory(path) {				
+					$('#content').empty();
+
+					App.ListDirectory(path, function(item) {
+						$('#content').append(
+							$('<div></div>')
+								.html(item.icon)
+								//.css('background-image', 'url('+item.icon+')')
+								.html(item.name)
+								.data('path', item.path)
+								.dblclick(function() {
+									ListDirectory($(this).data('path'));
+								})
+						);
+					});
+				};
+
+				ListDirectory(App.ROOT);
+			});
+		</script>
+	</head>
+	<body>
+		<div id="header"><input type="text"></div>
+		<div id="sidebar">
+			<strong>Main</strong>
+			<ul id="main">
+				<li data-path="ROOT">Root</li>
+				<li data-path="HOME">Home</li>
+			</ul>
+
+			<ul id="recent">
+				<li data-path="fav0">Documents</li>
+			</ul>
+		</div>
+		<div id="content">
+		</div>
+	</body>
+</html>
