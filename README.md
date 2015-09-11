@@ -1,2 +1,2 @@
 # oxyde
-Node-Webkit OxyDesk Environment
+Node-Webkit Desktop Environment (PC/STB's)
